@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<product productid="report_templates" active="1">
+	<title>Report Templates</title>
+	<description>Simplifies reports sending to moderators</description>
+	<version>0.1</version>
+	<url><![CDATA[http://www.vbulletin.org/forum/misc.php?do=producthelp&pid=report_templates]]></url>
+	<versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=report_templates]]></versioncheckurl>
+	<apm_releasedate>0</apm_releasedate>
+	<apm_author />
+	<apm_relatedurl />
+	<apm_extrainfo />
+	<apm_extraedit />
+	<dependencies>
+	</dependencies>
+	<codes>
+	</codes>
+	<templates>
+		<template name="rep_tmpl_css" templatetype="template" date="1289536378" username="jpatuk" version="0.1"><![CDATA[<style type="text/css">
+
+.rep_tmpl_menu {
+  width:auto;
+  height:auto;
+}
+
+.rep_tmpl_menu_inner {
+  background:{vb:stylevar popupmenu_background};
+  border:{vb:stylevar popupmenu_border};
+  padding:{vb:stylevar popupmenu_padding};
+  width:auto;
+  position:absolute;
+  top:50%;
+}
+
+.rep_tmpl_menu_width {
+  min-width:{vb:math {vb:stylevar form_columnright_width} + 10};
+}
+
+.rep_tmpl_menu_inner .rep_tmpl_content {
+  margin:5px;
+}
+
+.rep_tmpl_menu_inner p {
+  color:{vb:stylevar shade_color};
+  font-size:{vb:stylevar small_fontSize};
+  overflow:hidden;
+  line-height:150%;
+  margin-bottom:5px;
+}
+
+.rep_tmpl_thanks_message {
+  text-align:center;
+  font-weight:bold;
+  font-size:{vb:stylevar mid_fontSize} !important;
+}
+
+.rep_tmpl_menu_inner .error_message {
+  color:red;
+}
+
+.rep_tmpl_menu_inner .rep_tmpl_buttons {
+  float:right;
+}
+
+
+.rep_tmpl_menu_inner .rep_tmpl_buttons .disabled {
+  opacity:{vb:math {vb:stylevar editor_buttondisabled_opacity}/100};
+  -moz-opacity:{vb:math {vb:stylevar editor_buttondisabled_opacity}/100};
+  filter:alpha(opacity={vb:stylevar editor_buttondisabled_opacity});
+}
+
+.rep_tmpl_menu textarea {
+  width:{vb:math {vb:stylevar form_columnright_width}};
+  height:{vb:math {vb:stylevar form_columnright_width} / 3 };
+  width:100%;
+  margin-bottom:5px;
+  padding:2px;
+}
+
+.rep_tmpl_menu select {
+  min-width:{vb:math {vb:stylevar form_columnright_width}};
+  width:100%;
+  margin-bottom:5px;
+  padding:2px;
+}
+</style>]]></template>
+		<template name="rep_tmpl_init_js" templatetype="template" date="1289612379" username="jpatuk" version="0.1"><![CDATA[<script type="text/javascript">
+<!--
+var phrases = new Object();
+phrases['thanks'] = "{vb:rawphrase rep_tmpl_report_sent}";
+phrases['error'] = "{vb:rawphrase rep_tmpl_noreason}";
+phrases['description'] = "{vb:rawphrase only_used_to_report}";
+Rep_Templates.init({vb:raw answers}, "{vb:raw url}", phrases);
+// -->
+</script>]]></template>
+		<template name="rep_tmpl_js" templatetype="template" date="1289628590" username="jpatuk" version="0.1"><![CDATA[<vb:if condition="!$show['yui_menu_exists']">
+<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js?v={vb:raw vboptions.simpleversion}"></script>
+<script type="text/javascript" src="{vb:stylevar yuipath}/container/container_core-min.js?v={vb:raw vboptions.simpleversion}"></script>
+<script type="text/javascript" src="{vb:stylevar yuipath}/menu/menu-min.js?v={vb:raw vboptions.simpleversion}"></script>
+</vb:if>
+<vb:if condition="!$show['yui_animation_exists']">
+<script type="text/javascript" src="{vb:stylevar yuipath}/animation/animation-min.js?v={vb:raw vboptions.simpleversion}"></script>
+</vb:if>
+<script type="text/javascript" src="clientscript/rep_templates.js?v={vb:raw version}"></script>]]></template>
+		<template name="rep_tmpl_popup" templatetype="template" date="1289447622" username="jpatuk" version="0.1"><![CDATA[<div id="rep_tmpl_popup" class="rep_tmpl_menu">
+ <div id="rep_tmpl_menu_inner" class="rep_tmpl_menu_inner rep_tmpl_menu_width">
+  <div class="rep_tmpl_content">
+   <p id="rep_tmpl_phrase" class="">{vb:rawphrase only_used_to_report}</p>
+   <select name="report_reason" onchange="Rep_Templates.set_answer(this.selectedIndex);">
+    <option value="0" selected>{vb:rawphrase rep_tmpl_default_reason}</option>
+   <vb:each from="reasons" key="reasonid" value="reason">
+    <option value="{vb:math {vb:raw reasonid} + 1}">{vb:raw reason}</option>
+   </vb:each>
+   </select>
+   <p class="error_message" id="rep_tmpl_error"></p>
+   <textarea id="rep_tmpl_message" name="reason" class="primary textbox" tabindex="1"></textarea>
+   <div class="rep_tmpl_buttons">
+    <img src="{vb:stylevar imgdir_misc}/progress.gif" alt="" border="0" id="rep_tmpl_progress" style="display:none;"/>
+    <input type="submit" id="rep_tmpl_submit" class="button" value="{vb:rawphrase send_report}" tabindex="1" accesskey="s" onclick="return Rep_Templates.send_data(event);" />
+    <input type="reset" class="button" value="{vb:rawphrase cancel}" tabindex="1" onclick="Rep_Templates.hide_menu();"/>
+   </div>
+   </div>
+ </div>
+</div>]]></template>
+	</templates>
+	<stylevardfns>
+	</stylevardfns>
+	<stylevars>
+	</stylevars>
+	<plugins>
+		<plugin active="1" executionorder="5">
+			<title>Send report</title>
+			<hookname>ajax_complete</hookname>
+			<phpcode><![CDATA[if ($_POST['do'] == 'email_report')
+{
+    require_once(DIR . '/includes/functions_misc.php'); // for fetch_phrase
+    require_once(DIR . '/includes/class_reportitem.php');
+    require_once(DIR . '/includes/class_bootstrap_framework.php');
+
+    //check usergroup of user to see if they can use this
+    if (!$vbulletin->userinfo['userid'])
+    {
+        print_no_permission();
+    }
+
+    $reportthread = ($rpforumid = $vbulletin->options['rpforumid'] AND $rpforuminfo = fetch_foruminfo($rpforumid));
+    $reportemail = ($vbulletin->options['enableemail'] AND $vbulletin->options['rpemail']);
+
+    if (!$reportthread AND !$reportemail)
+    {
+        standard_error(fetch_error('emaildisabled'));
+    }
+
+    $report_type = 'post';
+    $reportobj = new vB_ReportItem_Post($vbulletin);
+    $reportobj->set_extrainfo('forum', $foruminfo);
+    $reportobj->set_extrainfo('thread', $threadinfo);
+
+    $forumperms = fetch_permissions($threadinfo['forumid']);
+    if (
+        !($forumperms & $vbulletin->bf_ugp_forumpermissions['canview']) OR
+        !($forumperms & $vbulletin->bf_ugp_forumpermissions['canviewthreads']) OR
+        (($threadinfo['postuserid'] != $vbulletin->userinfo['userid']) AND !($forumperms & $vbulletin->bf_ugp_forumpermissions['canviewothers']))
+        )
+    {
+        print_no_permission();
+    }
+
+    // check if there is a forum password and if so, ensure the user has it set
+    verify_forum_password($foruminfo['forumid'], $foruminfo['password']);
+
+    if (!$postinfo['postid'])
+    {
+        standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink']));
+    }
+
+    if ((!$postinfo['visible'] OR $postinfo ['isdeleted']) AND !can_moderate($threadinfo['forumid']))
+    {
+        standard_error(fetch_error('invalidid', $vbphrase['post'], $vbulletin->options['contactuslink']));
+    }
+
+    if ((!$threadinfo['visible'] OR $threadinfo['isdeleted']) AND !can_moderate($threadinfo['forumid']))
+    {
+        standard_error(fetch_error('invalidid', $vbphrase['thread'], $vbulletin->options['contactuslink']));
+    }
+
+    $vbulletin->input->clean_array_gpc('p', array('reason' => TYPE_STR));
+
+    if ($vbulletin->GPC['reason'] == '')
+    {
+        standard_error(fetch_error('noreason'));
+    }
+
+    if ($perform_floodcheck)
+    {
+        $reportobj->perform_floodcheck_commit();
+    }
+
+    $reportobj->do_report(htmlspecialchars($vbulletin->GPC['reason']), $postinfo);
+
+    // create response for ajax
+    require_once(DIR . '/includes/class_xml.php');
+
+    $xml = new vB_AJAX_XML_Builder($vbulletin, 'text/xml');
+    $xml->add_group('report');
+    $xml->add_tag('result', 1);
+    $xml->close_group();
+    $xml->print_xml(); 
+}]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
+			<title>Cache templates</title>
+			<hookname>cache_templates</hookname>
+			<phpcode><![CDATA[if (THIS_SCRIPT == 'showthread' AND $show['member'])
+{
+    $cache = array_merge((array)$cache,array(
+        'rep_tmpl_css',
+        'rep_tmpl_popup',
+        'rep_tmpl_js',
+        'rep_tmpl_init_js'
+    ));
+}]]></phpcode>
+		</plugin>
+		<plugin active="1" executionorder="5">
+			<title>Insert js and css</title>
+			<hookname>parse_templates</hookname>
+			<phpcode><![CDATA[if ('showthread' == THIS_SCRIPT  AND $show['member'])
+{
+    $questions = explode('=', $vbulletin->options['rep_tmpl_templates']);
+    $report_reasons = array();
+    $report_detailed = array();
+    if (count($questions) > 0) {
+        $order = array("\r\n", "\n", "\r");
+        for ($i = 1; $i <count($questions); $i++) {
+            $tmp = explode('\n',str_replace($order,'\n',$questions[$i]),2);
+
+            if (count($tmp) == 2)
+            {
+                $report_reasons[] = $tmp[0];
+                $report_detailed[] = $tmp[1];
+            }
+        }
+
+        $templater = vB_Template::create('rep_tmpl_js');
+        $templater->register('version', 0.1);
+        $template_hook['headinclude_javascript'] .= $templater->render();
+
+        if (!$show['yui_menu_exists'])
+        {
+            $show['yui_menu_exists'] = true;
+        }
+        if (!$show['yui_animation_exists'])
+        {
+            $show['yui_animation_exists'] = true;
+        } 
+        $templater = vB_Template::create('rep_tmpl_init_js');
+        $templater->register('answers', '[\''.implode($report_detailed, '\',\'').'\']');
+        $templater->register('url', fetch_seo_url('thread', $threadinfo));
+        $template_hook['footer_javascript'] .= $templater->render();
+
+        $templater = vB_Template::create('rep_tmpl_popup');
+        $templater->register('reasons', $report_reasons);
+        $template_hook['showthread_after_activeusers'] .= $templater->render();
+
+        $templater = vB_Template::create('rep_tmpl_css');
+        $template_hook['headinclude_bottom_css'] .= $templater->render();
+    }
+}]]></phpcode>
+		</plugin>
+	</plugins>
+	<phrases>
+		<phrasetype name="Postbit" fieldname="postbit">
+			<phrase name="rep_tmpl_default_reason" date="1288853816" username="jpatuk" version=""><![CDATA[Select a reason for report or write your own]]></phrase>
+			<phrase name="rep_tmpl_noreason" date="1288831393" username="jpatuk" version=""><![CDATA[Please enter a reason for report.]]></phrase>
+			<phrase name="rep_tmpl_report_sent" date="1289357354" username="jpatuk" version=""><![CDATA[Thanks, your report was sent.]]></phrase>
+		</phrasetype>
+		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
+			<phrase name="setting_rep_tmpl_templates_desc" date="1289627723" username="Vitaly" version="0.1"><![CDATA[Please add report templates in following format:<br/>
+<br/>
+Start template with "=", followed by title for generated combobox.<br/>
+And continue any multiline text, that will be inserted to report, when user selects this item.]]></phrase>
+			<phrase name="setting_rep_tmpl_templates_title" date="1289627723" username="Vitaly" version="0.1"><![CDATA[Templates for report]]></phrase>
+			<phrase name="settinggroup_rep_tmpl_settings" date="1288342353" username="jpatuk" version="0.1"><![CDATA[Report Templates]]></phrase>
+		</phrasetype>
+	</phrases>
+	<options>
+		<settinggroup name="rep_tmpl_settings" displayorder="65535">
+			<setting varname="rep_tmpl_templates" displayorder="10">
+				<datatype>free</datatype>
+				<optioncode>textarea</optioncode>
+				<defaultvalue>=Report 1 title
+sample multiline
+text of first report
+=Report 2 title
+sample multiline
+text of secont report</defaultvalue>
+			</setting>
+		</settinggroup>
+	</options>
+	<helptopics>
+	</helptopics>
+	<cronentries>
+	</cronentries>
+	<faqentries>
+	</faqentries>
+	<templateedits>
+	</templateedits>
+</product>

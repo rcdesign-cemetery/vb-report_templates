@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<language name="Russian (RU)" vbversion="4.0.7" product="report_templates" type="custom">
+	<settings>
+		<options><![CDATA[1]]></options>
+		<languagecode><![CDATA[ru]]></languagecode>
+		<charset><![CDATA[UTF-8]]></charset>
+		<imagesoverride />
+		<dateoverride><![CDATA[d.m.Y]]></dateoverride>
+		<timeoverride><![CDATA[H:i]]></timeoverride>
+		<registereddateoverride><![CDATA[d.m.Y]]></registereddateoverride>
+		<calformat1override><![CDATA[d.m.Y]]></calformat1override>
+		<calformat2override><![CDATA[d.m]]></calformat2override>
+		<logdateoverride><![CDATA[H:i, d.m.Y]]></logdateoverride>
+		<locale />
+		<decimalsep><![CDATA[.]]></decimalsep>
+		<thousandsep><![CDATA[,]]></thousandsep>
+	</settings>
+	<phrasetype name="Postbit" fieldname="postbit">
+		<phrase name="rep_tmpl_default_reason" date="1288853816" username="jpatuk"><![CDATA[Выберите причину для жалобы или напишите собственную]]></phrase>
+		<phrase name="rep_tmpl_noreason" date="1288831393" username="jpatuk"><![CDATA[Пожалуйста, введите причину жалобы.]]></phrase>
+		<phrase name="rep_tmpl_report_sent" date="1289357354" username="jpatuk"><![CDATA[Спасибо, ваша жалоба отправлена.]]></phrase>
+	</phrasetype>
+</language>
